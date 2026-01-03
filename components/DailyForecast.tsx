@@ -1,43 +1,31 @@
 
 import React from 'react';
+import { WeatherData } from '../types';
 import { WeatherIcon } from './WeatherIcons';
 
-interface DailyData {
-  day: string;
-  high: number;
-  low: number;
-  condition: string;
-  description: string;
-}
-
 interface DailyForecastProps {
-  data: DailyData[];
+  data: WeatherData['daily'];
 }
 
-/**
- * Renders a summary of the weather for the next 7 days.
- */
 export const DailyForecast: React.FC<DailyForecastProps> = ({ data }) => {
   return (
-    <div className="glass rounded-[40px] p-8">
-      <h3 className="text-2xl font-bold text-white mb-6">7-Day Forecast</h3>
-      <div className="space-y-6">
-        {data.map((day, i) => (
-          <div key={i} className="group flex items-center justify-between py-2 border-b border-slate-800/50 last:border-0">
-            <div className="flex items-center gap-4 w-1/3">
-              <span className={`text-sm font-bold ${i === 0 ? 'text-blue-400' : 'text-slate-400'}`}>
-                {day.day}
-              </span>
+    <div className="glass rounded-3xl p-6">
+      <h3 className="text-xl font-bold mb-6">7-Day Forecast</h3>
+      <div className="space-y-4">
+        {data.map((day, idx) => (
+          <div key={idx} className="flex items-center justify-between py-3 border-b border-slate-700/50 last:border-0 group hover:bg-slate-700/20 transition-colors px-2 rounded-xl">
+            <div className="w-24">
+              <span className="font-medium text-slate-200">{day.day}</span>
             </div>
             
-            <div className="flex items-center justify-center gap-3 w-1/3">
+            <div className="flex items-center gap-3 flex-1 justify-center">
               <WeatherIcon condition={day.condition} className="w-6 h-6 text-blue-400" />
-              <span className="text-xs text-slate-500 hidden md:inline capitalize">{day.condition}</span>
+              <span className="text-sm text-slate-400 hidden sm:inline-block capitalize">{day.condition}</span>
             </div>
 
-            <div className="flex items-center justify-end gap-4 w-1/3">
-              <span className="text-sm font-bold text-white">{day.high}°</span>
-              <span className="text-sm text-slate-600">{day.low}°</span>
+            <div className="flex items-center gap-4 w-28 justify-end">
+              <span className="font-bold text-blue-400 text-lg">{day.high}°</span>
+              <span className="text-slate-500 text-lg">{day.low}°</span>
             </div>
           </div>
         ))}
