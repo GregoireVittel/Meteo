@@ -1,0 +1,5 @@
+{
+  "name": "Croissy-sur-Seine Weather",
+  "description": "A high-precision weather forecasting dashboard for Croissy-sur-Seine, France, providing real-time hourly and daily data.",
+  "requestFramePermissions": []
+}
